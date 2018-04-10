@@ -5,10 +5,13 @@
   <meta charset="UTF-8">
   <title>Untitled Document</title>
   <style type="text/css">
-    #downloadButton {
-      width: 34px;
-      height: 33px;
-      margin-top: 7px;
+    .downloadStyle {
+        order: 9;
+        -webkit-box-ordinal-group: 9;
+        -moz-box-ordinal-group: 9;
+        -webkit-order: 9;
+        -ms-flex-order: 9;
+        padding-top: 7px !important;
     }
   </style>
 </head>
@@ -26,6 +29,8 @@
     width="640" height="360"></video>
   <script src="//players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
 
+  <script src="//learning-services-media.brightcove.com/bc-player/plugins/download-video-sample/download.js"></script>
+
   <script type="text/javascript">
     videojs("myPlayerID").ready(function() {
       // Create variables and new div, anchor and image for download icon
@@ -36,7 +41,6 @@
         highestQuality,
         spacer,
         newElement = document.createElement('div'),
-        newLink = document.createElement('a'),
         newImage = document.createElement('img');
 
       myPlayer.on('loadstart', function() {
@@ -64,16 +68,21 @@
         // +++ Extract the highest rendition +++
         highestQuality = mp4Ara[0].src;
 
-        // +++ Build the download button element +++
-        newElement.id = 'downloadButton';
+        // +++ Build the download image element +++
+        newElement.id = 'downloadImage';
         newElement.className = 'downloadStyle vjs-control';
         newImage.setAttribute('src', 'http://solutions.brightcove.com/bcls/brightcove-player/download-video/file-download.png');
-        newLink.setAttribute('href', highestQuality);
-        newLink.setAttribute('download', videoName);
-        newLink.appendChild(newImage);
-        newElement.appendChild(newLink);
+        newImage.style['cursor'] = 'pointer';
 
-        // +++ Place the download button +++
+        // +++ On image click call the download function +++
+        newImage.onclick = function(){
+          // This function forces download by the browsers
+          // NOT opening the video in a new window/tab
+          download(highestQuality,videoName);
+        }
+        newElement.appendChild(newImage);
+
+        // +++ Place the download image +++
         // Get a handle on the spacer element
         spacer = myPlayer.controlBar.customControlSpacer.el();
         // Set the content of the spacer to be right justified
