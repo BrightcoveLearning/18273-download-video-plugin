@@ -4,7 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Untitled Document</title>
-  <link href="download-video.css" rel="stylesheet">
+    <style>
+    .video-js {
+      height: 344px;
+      width: 610px;
+    }
+  </style>
+  <link href="//solutions.brightcove.com/bcls/brightcove-player/download-video/download-video.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,17 +22,14 @@
     data-embed="default"
     data-application-id
     class="video-js"
-    controls
-    width="640" height="360"></video>
+    controls></video>
+
   <script src="//players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
 
-  <script src="download.js"></script>
-
-  <script src="download-video.js"></script>
+  <script src="//solutions.brightcove.com/bcls/brightcove-player/download-video/download-video.js"></script>
 
   <script type="text/javascript">
-    videojs("myPlayerID").ready(function() {
-      // Create variables and new div, anchor and image for download icon
+  videojs('myPlayerID').ready(function(){
       var myPlayer = this;
       myPlayer.downloadVideo();
     });
