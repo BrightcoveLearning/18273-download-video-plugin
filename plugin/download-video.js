@@ -46,7 +46,7 @@ videojs.registerPlugin('downloadVideo', function() {
       newImage.onclick = function(){
         // This function forces download by the browsers
         // NOT opening the video in a new window/tab
-        download(highestQuality,videoName);
+        download(highestQuality);
       }
       newElement.appendChild(newImage);
 
