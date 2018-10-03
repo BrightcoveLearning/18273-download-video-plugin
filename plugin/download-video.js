@@ -42,9 +42,13 @@ videojs.registerPlugin('downloadVideo', function() {
 
     // +++ On image click call the download function +++
     newImage.onclick = function() {
-      // This function forces download by the browsers
+      // The download function forces download by the browsers
       // NOT opening the video in a new window/tab
-      download(highestQuality);
+      var x=new XMLHttpRequest();
+    	x.open("GET", highestQuality, true);
+    	x.responseType = 'blob';
+    	x.onload=function(e){download(x.response, "video-file.mp4", "video/mp4"); }
+    	x.send();          //
     }
     newElement.appendChild(newImage);
 

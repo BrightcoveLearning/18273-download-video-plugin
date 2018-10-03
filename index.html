@@ -23,14 +23,14 @@
 
 <body>
 
-  <video id="myPlayerID"
-    data-video-id="5701190170001"
+  <video-js id="myPlayerID"
+    data-video-id="5842800655001"
     data-account="1752604059001"
     data-player="S10RYv9QG"
     data-embed="default"
     data-application-id
     class="video-js"
-    controls></video>
+    controls></video-js>
 
   <script src="//players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
 
@@ -79,9 +79,13 @@
 
         // +++ On image click call the download function +++
         newImage.onclick = function() {
-          // This function forces download by the browsers
+          // The download function forces download by the browsers
           // NOT opening the video in a new window/tab
-          download(highestQuality);
+          var x=new XMLHttpRequest();
+        	x.open("GET", highestQuality, true);
+        	x.responseType = 'blob';
+        	x.onload=function(e){download(x.response, "video-file.mp4", "video/mp4"); }
+        	x.send();          //
         }
         newElement.appendChild(newImage);
 
