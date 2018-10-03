@@ -16,6 +16,7 @@ videojs.registerPlugin('downloadVideo', function() {
 
     // +++ Get video name and the MP4 renditions +++
     videoName = myPlayer.mediainfo['name'];
+    videoName = removeSpaces(videoName);
     rendtionsAra = myPlayer.mediainfo.sources;
     totalRenditions = rendtionsAra.length;
 
@@ -47,7 +48,7 @@ videojs.registerPlugin('downloadVideo', function() {
       var x=new XMLHttpRequest();
     	x.open("GET", highestQuality, true);
     	x.responseType = 'blob';
-    	x.onload=function(e){download(x.response, "video-file.mp4", "video/mp4"); }
+    	x.onload=function(e){download(x.response, videoName, "video/mp4"); }
     	x.send();          //
     }
     newElement.appendChild(newImage);
@@ -60,6 +61,17 @@ videojs.registerPlugin('downloadVideo', function() {
     // Place the new element in the spacer
     spacer.appendChild(newElement);
   })
+
+/*
+     * remove spaces from a string
+     * @param {String} str string to process
+     * @return {String} trimmed string
+     */
+    function removeSpaces(str) {
+      str= str.replace(/\s/g, '');
+      return str;
+    }
+
 });
   //download.js v4.2, by dandavis; 2008-2016. [CCBY2] see http://danml.com/download.html for tests/usage
   // v1 landed a FF+Chrome compat way of downloading strings to local un-named files, upgraded to use a hidden frame and optional mime
