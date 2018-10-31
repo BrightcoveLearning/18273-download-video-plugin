@@ -15,21 +15,21 @@
 
 <body>
 
-  <video id="myPlayerID"
+  <video-js id="myPlayerID"
     data-video-id="5701190170001"
     data-account="1752604059001"
     data-player="S10RYv9QG"
     data-embed="default"
     data-application-id
     class="video-js"
-    controls></video>
+    controls></video-js>
 
-  <script src="//players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
+  <script src="https://players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
 
-  <script src="//solutions.brightcove.com/bcls/brightcove-player/download-video/download-video.js"></script>
+  <script src="https://solutions.brightcove.com/bcls/brightcove-player/download-video/download-video.js"></script>
 
   <script type="text/javascript">
-  videojs('myPlayerID').ready(function(){
+  videojs.getPlayer('myPlayerID').ready(function() {
       var myPlayer = this;
       myPlayer.downloadVideo();
     });

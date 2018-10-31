@@ -38,7 +38,7 @@ videojs.registerPlugin('downloadVideo', function() {
     // +++ Build the download image element +++
     newElement.id = 'downloadImage';
     newElement.className = 'vjs-control downloadStyle';
-    newImage.setAttribute('src', 'http://solutions.brightcove.com/bcls/brightcove-player/download-video/file-download.png');
+    newImage.setAttribute('src', 'https://solutions.brightcove.com/bcls/brightcove-player/download-video/file-download.png');
     newImage.style['cursor'] = 'pointer';
 
     // +++ On image click call the download function +++

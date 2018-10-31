@@ -32,10 +32,10 @@
     class="video-js"
     controls></video-js>
 
-  <script src="//players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
+  <script src="https://players.brightcove.net/1752604059001/S10RYv9QG_default/index.min.js"></script>
 
   <script type="text/javascript">
-    videojs('myPlayerID').ready(function(){
+    videojs.getPlayer('myPlayerID').ready(function() {
       // Create variables and new div, anchor and image for download icon
       var myPlayer = this,
         videoName,
@@ -75,7 +75,7 @@
         // +++ Build the download image element +++
         newElement.id = 'downloadImage';
         newElement.className = 'vjs-control downloadStyle';
-        newImage.setAttribute('src', 'http://solutions.brightcove.com/bcls/brightcove-player/download-video/file-download.png');
+        newImage.setAttribute('src', 'https://solutions.brightcove.com/bcls/brightcove-player/download-video/file-download.png');
         newImage.style['cursor'] = 'pointer';
 
         // +++ On image click call the download function +++
