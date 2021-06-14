@@ -68,7 +68,9 @@ videojs.registerPlugin('downloadVideo', function() {
      * @return {String} trimmed string
      */
     function removeSpaces(str) {
-      str= str.replace(/\s/g, '');
+      // remove spaces and periods
+      str = str.replace(/\s/g, '');
+      str = str.replaceAll('.', '');
       return str;
     }
 
