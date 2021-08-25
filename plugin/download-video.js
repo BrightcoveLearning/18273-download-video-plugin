@@ -7,7 +7,7 @@ videojs.registerPlugin('downloadVideo', function() {
     highestQuality,
     spacer,
     newElement = document.createElement('div'),
-    newImage = document.createElement('img');
+    newLink = document.createElement('a');
 
   myPlayer.on('loadstart', function() {
     //Reinitialize array of MP4 renditions in case used with playlist
@@ -36,22 +36,36 @@ videojs.registerPlugin('downloadVideo', function() {
     highestQuality = mp4Ara[0].src;
 
     // +++ Build the download image element +++
-    newElement.id = 'downloadImage';
     newElement.className = 'vjs-control downloadStyle';
-    newImage.setAttribute('src', 'https://solutions.brightcove.com/bcls/brightcove-player/download-video/file-download.png');
-    newImage.style['cursor'] = 'pointer';
+    newLink.href = highestQuality;
+    newLink.title = 'Download ' + myPlayer.mediainfo.name;
 
     // +++ On image click call the download function +++
-    newImage.onclick = function() {
+    newLink.onclick = function(event) {
+      // The link could be right-clicked for download as...
+      event.preventDefault();
+
+      if (newElement.classList.contains('downloading')) {
+        // Do nothing if already downloading.
+        return;
+      }
+
+      newElement.classList.add('downloading');
+      newLink.title = 'Downloading ' + myPlayer.mediainfo.name;
+
       // The download function forces download by the browsers
       // NOT opening the video in a new window/tab
       var x=new XMLHttpRequest();
     	x.open("GET", highestQuality, true);
     	x.responseType = 'blob';
-    	x.onload=function(e){download(x.response, videoName, "video/mp4"); }
+    	x.onload=function(e){
+        newElement.classList.remove('downloading');
+        newLink.title = 'Download ' + myPlayer.mediainfo.name;
+        download(x.response, videoName, "video/mp4");
+      }
     	x.send();          //
     }
-    newElement.appendChild(newImage);
+    newElement.appendChild(newLink);
 
     // +++ Place the download image +++
     // Get a handle on the spacer element
