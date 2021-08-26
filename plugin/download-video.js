@@ -59,11 +59,17 @@ videojs.registerPlugin('downloadVideo', function() {
     	x.open("GET", highestQuality, true);
     	x.responseType = 'blob';
     	x.onload=function(e){
+        newElement.textContent = '';
         newElement.classList.remove('downloading');
         newLink.title = 'Download ' + myPlayer.mediainfo.name;
         download(x.response, videoName, "video/mp4");
       }
-    	x.send();          //
+      x.onprogress = function(event) {
+        var progress = Math.floor(event.loaded / (event.total / 100));
+        newElement.textContent = progress + '%';
+        newLink.title = 'Downloading ' + myPlayer.mediainfo.name + ' - ' + progress + '%';
+      }
+    	x.send();
     }
     newElement.appendChild(newLink);
 
